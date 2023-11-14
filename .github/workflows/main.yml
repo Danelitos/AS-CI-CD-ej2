@@ -1,0 +1,22 @@
+name: Analisis de calidad
+
+on: push
+
+jobs:
+  calidad:
+    runs-on: ubuntu-latest
+
+    permissions:
+      security-events: write
+
+    steps:
+    - name: Bajar codigo
+      uses: actions/checkout@v4
+
+    - name: Ejecutar codigo
+      uses: advanced-security/python-lint-code-scanning-action@v1
+      with:
+        linter: pylint
+
+    - name: Probar codigo
+      run: python main.py
